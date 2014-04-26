@@ -39,11 +39,13 @@ bool GameLayer::init()
 		background1 = Sprite::createWithSpriteFrameName("background.png");
 		background1->setAnchorPoint(Point::ZERO);
 		background1->setPosition(Point::ZERO);
+        background1->getTexture()->setAliasTexParameters();
 		this->addChild(background1);
 
 		background2 = Sprite::createWithSpriteFrameName("background.png");
 		background2->setAnchorPoint(Point::ZERO);
 		background2->setPosition(Point(0,background2->getContentSize().height-2));
+        background2->getTexture()->setAliasTexParameters();
 		this->addChild(background2);
 
 		this->planeLayer = PlaneLayer::create();
