@@ -59,8 +59,8 @@ bool GameOverLayer::init()
 		menuBack->setPosition(Point::ZERO);
 		this->addChild(menuBack);
 
-		auto strScore = CCString::createWithFormat("%d",score);
-		auto finalScore = Label::createWithBMFont("font.fnt", strScore->getCString());
+        Value strScore(score);
+		auto finalScore = Label::createWithBMFont("font.fnt", strScore.asString());
 		finalScore->setColor(Color3B(143,146,147));
 		finalScore->setPosition(Point(winSize.width/2, winSize.height/2));
 		this->addChild(finalScore);
@@ -72,8 +72,8 @@ bool GameOverLayer::init()
 		auto sequence = Sequence::create(delay, scalebig, scalelittle, showAD, nullptr);
 		finalScore->runAction(sequence);
 
-		auto strHighestScore = CCString::createWithFormat("%d", highestHistoryScore);
-		highestScore = Label::createWithBMFont("font.fnt", strHighestScore->getCString());
+        Value strHighestScore(highestHistoryScore);
+		highestScore = Label::createWithBMFont("font.fnt", strHighestScore.asString());
 		highestScore->setColor(Color3B(143,146,147));
 		highestScore->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
 		highestScore->setPosition(Point(140,winSize.height-30));
@@ -106,8 +106,8 @@ void GameOverLayer::menuBackCallback(Ref* pSender)
 void GameOverLayer::beginChangeHighestScore(Node* pNode)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("achievement.mp3");
-	auto changeScore = CCString::createWithFormat("%d",score);
-	highestScore->setString(changeScore->getCString());
+	Value changeScore(score);
+	highestScore->setString(changeScore.asString());
 }
 
 void GameOverLayer::showAD()

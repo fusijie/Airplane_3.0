@@ -66,7 +66,7 @@ void ControlLayer::updateScore(int score)
 {
 	if (score>=0 && score<=MAX_SCORE)
 	{
-		auto strScore=CCString::createWithFormat("%d",score);
-		scoreItem->setString(strScore->getCString());
+        Value strScore(score);
+		scoreItem->setString(strScore.asString());
 	}
 }

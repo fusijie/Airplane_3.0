@@ -25,7 +25,7 @@ PlaneLayer* PlaneLayer::create()
 	else
 	{
 		CC_SAFE_DELETE(pRet);
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -52,9 +52,6 @@ bool PlaneLayer::init()
 		
 		plane->runAction(blink);
 		plane->runAction(RepeatForever::create(animate));
-		
-		//CCSequence* sequence=CCSequence::create(blink,CCRepeatForever::create(animate),NULL);
-		//plane->runAction(sequence);
 
 		bRet = true;
 	} while (0);
