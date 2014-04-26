@@ -3,7 +3,7 @@
 
 ## 项目
 
-这是项目 [微信飞机大战](https://github.com/fusijie/Airplane_3.0.git)开源代码，基于Mac + cocos2d-x v3.0，移植自 [2.2.0版](https://github.com/fusijie/Airplane_2.2.0.git)。欢迎访问，如有任何问题请联系本人或直接pull request。
+这是项目 [微信飞机大战](https://github.com/fusijie/Airplane_3.0.git)开源代码，基于XCode + cocos2d-x v3.0，移植自 [2.2.0版](https://github.com/fusijie/Airplane_2.2.0.git)。欢迎访问，如有任何问题请联系本人或直接pull request。
 
 作者：JackyFu
 

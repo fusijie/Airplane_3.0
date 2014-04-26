@@ -1,7 +1,7 @@
 #include "NoTouchLayer.h"
 
 bool NoTouchLayer::init(){  
-	if (!CCLayer::init() )  
+	if (!Layer::init() )  
 	{  
 		return false;  
 	}

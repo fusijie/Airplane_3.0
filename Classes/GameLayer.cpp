@@ -82,8 +82,8 @@ bool GameLayer::init()
 
 void GameLayer::backgroundMove(float dt)
 {
-	background1->setPositionY(background1->getPositionY()-2);
-	background2->setPositionY(background1->getPositionY()+background1->getContentSize().height-2);
+	background1->setPositionY(int(background1->getPositionY())-2);
+	background2->setPositionY(int(background1->getPositionY())+int(background1->getContentSize().height)-2);
 	if (background2->getPositionY() == 0)
 	{
 		background1->setPositionY(0);

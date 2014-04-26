@@ -40,9 +40,9 @@ public:
 
 public:
 
-	LabelBMFont* scoreItem;
+	Label* scoreItem;
 
-	CCMenuItemImage* pPauseItem;
+	MenuItemSprite* pPauseItem;
 
 	NoTouchLayer* noTouchLayer;
 };

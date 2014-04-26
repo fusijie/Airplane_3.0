@@ -83,7 +83,7 @@ void UFOLayer::AddBigBoom(float dt)
 	auto move1 = MoveBy::create(0.5, Point(0, -150));
 	auto move2 = MoveBy::create(0.3, Point(0, 100));
 	auto move3 = MoveBy::create(1.0, Point(0, 0-winSize.height-bigBoomSize.height/2));
-	auto moveDone = CCCallFuncN::create(CC_CALLBACK_1(UFOLayer::bigBoomMoveFinished, this));
+	auto moveDone = CallFuncN::create(CC_CALLBACK_1(UFOLayer::bigBoomMoveFinished, this));
 
 	auto sequence = Sequence::create(move1, move2, move3, moveDone, nullptr);
 	bigBoom->runAction(sequence);

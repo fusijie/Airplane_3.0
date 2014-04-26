@@ -60,7 +60,7 @@ bool GameOverLayer::init()
 		this->addChild(menuBack);
 
 		auto strScore = CCString::createWithFormat("%d",score);
-		auto finalScore = LabelBMFont::create(strScore->getCString(), "font.fnt");
+		auto finalScore = Label::createWithBMFont("font.fnt", strScore->getCString());
 		finalScore->setColor(Color3B(143,146,147));
 		finalScore->setPosition(Point(winSize.width/2, winSize.height/2));
 		this->addChild(finalScore);
@@ -73,7 +73,7 @@ bool GameOverLayer::init()
 		finalScore->runAction(sequence);
 
 		auto strHighestScore = CCString::createWithFormat("%d", highestHistoryScore);
-		highestScore = LabelBMFont::create(strHighestScore->getCString(), "font.fnt");
+		highestScore = Label::createWithBMFont("font.fnt", strHighestScore->getCString());
 		highestScore->setColor(Color3B(143,146,147));
 		highestScore->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
 		highestScore->setPosition(Point(140,winSize.height-30));
@@ -100,7 +100,7 @@ void GameOverLayer::menuBackCallback(Ref* pSender)
 {
 	auto pScene = GameScene::create();
 	auto animateScene = TransitionSlideInL::create(1.0f, pScene);
-	CCDirector::getInstance()->replaceScene(animateScene);
+	Director::getInstance()->replaceScene(animateScene);
 }
 
 void GameOverLayer::beginChangeHighestScore(Node* pNode)

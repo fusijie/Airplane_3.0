@@ -15,26 +15,23 @@ bool ControlLayer::init()
 	bool bRet = false;
 	do 
 	{
-		CC_BREAK_IF(!CCLayer::init());
+		CC_BREAK_IF(!Layer::init());
 
-//		CCSize winSize=CCDirector::sharedDirector()->getWinSize();
-//
-//		//加入PauseMenu
-//		CCSprite* normalPause=CCSprite::createWithSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("game_pause_nor.png"));
-//		CCSprite* pressedPause=CCSprite::createWithSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("game_pause_pressed.png"));
-//		pPauseItem=CCMenuItemImage::create();
-//		pPauseItem->initWithNormalSprite(normalPause,pressedPause,NULL,this,menu_selector(ControlLayer::menuPauseCallback));
-//		pPauseItem->setPosition(ccp(normalPause->getContentSize().width/2+10,winSize.height-normalPause->getContentSize().height/2-10));
-//		CCMenu *menuPause=CCMenu::create(pPauseItem,NULL);
-//		menuPause->setPosition(CCPointZero);
-//		this->addChild(menuPause,101);
-//
-//		//加入score
-//		scoreItem=CCLabelBMFont::create("0","font/font.fnt");
-//		scoreItem->setColor(ccc3(143,146,147));
-//		scoreItem->setAnchorPoint(ccp(0,0.5));
-//		scoreItem->setPosition(ccp(pPauseItem->getPositionX()+normalPause->getContentSize().width/2+5,pPauseItem->getPositionY()));
-//		this->addChild(scoreItem);
+		auto winSize = Director::getInstance()->getWinSize();
+
+		auto normalPause = Sprite::createWithSpriteFrameName("game_pause_nor.png");
+		auto pressedPause = Sprite::createWithSpriteFrameName("game_pause_pressed.png");
+		pPauseItem = MenuItemSprite::create(normalPause, pressedPause, CC_CALLBACK_1(ControlLayer::menuPauseCallback, this));
+		pPauseItem->setPosition(Point(normalPause->getContentSize().width/2+10, winSize.height-normalPause->getContentSize().height/2-10));
+        auto menuPause = Menu::create(pPauseItem, nullptr);
+		menuPause->setPosition(Point::ZERO);
+		this->addChild(menuPause,101);
+
+		scoreItem = Label::createWithBMFont("font.fnt", "0");
+		scoreItem->setColor(Color3B(143,146,147));
+		scoreItem->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
+		scoreItem->setPosition(Point(pPauseItem->getPositionX()+normalPause->getContentSize().width/2+5, pPauseItem->getPositionY()));
+		this->addChild(scoreItem);
 
 		bRet = true;
 	} while (0);
@@ -42,34 +39,34 @@ bool ControlLayer::init()
 	return bRet;
 }
 
-void ControlLayer::menuPauseCallback(CCObject* pSender)
+void ControlLayer::menuPauseCallback(Ref* pSender)
 {
-//	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sound/button.mp3");
-//	if(!CCDirector::sharedDirector()->isPaused())
-//	{
-//		pPauseItem->setNormalSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("game_resume_nor.png"));
-//		pPauseItem->setSelectedSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("game_resume_pressed.png"));
-//		CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-//		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-//		CCDirector::sharedDirector()->pause();
-//		noTouchLayer=NoTouchLayer::create();
-//		this->addChild(noTouchLayer);
-//	}
-//	else
-//	{
-//		pPauseItem->setNormalSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("game_pause_nor.png"));
-//		pPauseItem->setSelectedSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("game_pause_pressed.png"));
-//		CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-//		CCDirector::sharedDirector()->resume();
-//		this->removeChild(noTouchLayer,true);
-//	}
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button.mp3");
+	if(!CCDirector::getInstance()->isPaused())
+	{
+		pPauseItem->setNormalImage(Sprite::createWithSpriteFrameName("game_resume_nor.png"));
+		pPauseItem->setSelectedImage(Sprite::createWithSpriteFrameName("game_resume_pressed.png"));
+		CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+		CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
+		Director::getInstance()->pause();
+		noTouchLayer = NoTouchLayer::create();
+		this->addChild(noTouchLayer);
+	}
+	else
+	{
+		pPauseItem->setNormalImage(Sprite::createWithSpriteFrameName("game_pause_nor.png"));
+		pPauseItem->setSelectedImage(Sprite::createWithSpriteFrameName("game_pause_pressed.png"));
+		CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+		Director::getInstance()->resume();
+		this->removeChild(noTouchLayer,true);
+	}
 }
 
 void ControlLayer::updateScore(int score)
 {
 	if (score>=0 && score<=MAX_SCORE)
 	{
-//		CCString* strScore=CCString::createWithFormat("%d",score);
-//		scoreItem->setString(strScore->getCString());
+		auto strScore=CCString::createWithFormat("%d",score);
+		scoreItem->setString(strScore->getCString());
 	}
 }

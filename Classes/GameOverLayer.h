@@ -41,5 +41,5 @@ public:
 
 	static int highestHistoryScore;
 
-	LabelBMFont* highestScore;
+	Label* highestScore;
 };

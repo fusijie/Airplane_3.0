@@ -61,9 +61,9 @@ bool EnemyLayer::init()
 		animation3->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy3_down5.png"));
 		animation3->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy3_down6.png"));
 
-		CCAnimationCache::getInstance()->addAnimation(animation1, "Enemy1Blowup");
-		CCAnimationCache::getInstance()->addAnimation(animation2, "Enemy2Blowup");
-		CCAnimationCache::getInstance()->addAnimation(animation3, "Enemy3Blowup");
+		AnimationCache::getInstance()->addAnimation(animation1, "Enemy1Blowup");
+		AnimationCache::getInstance()->addAnimation(animation2, "Enemy2Blowup");
+		AnimationCache::getInstance()->addAnimation(animation3, "Enemy3Blowup");
 
 		this->schedule(schedule_selector(EnemyLayer::addEnemy1),0.5f);
 		this->schedule(schedule_selector(EnemyLayer::addEnemy2),3.0f);
@@ -132,7 +132,7 @@ void EnemyLayer::enemy1MoveFinished(Node* pSender)
 
 void EnemyLayer::enemy1Blowup(Enemy* enemy1)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/enemy1_down.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("enemy1_down.mp3");
 	auto animation = AnimationCache::getInstance()->getAnimation("Enemy1Blowup");
 	auto animate = Animate::create(animation);
 	auto removeEnemy1 = CallFunc::create(CC_CALLBACK_0(EnemyLayer::removeEnemy1, this, enemy1));
@@ -219,12 +219,12 @@ void EnemyLayer::enemy2MoveFinished(Node* pSender)
 
 void EnemyLayer::enemy2Blowup(Enemy* enemy2)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/enemy2_down.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("enemy2_down.mp3");
 	auto animation = AnimationCache::getInstance()->getAnimation("Enemy2Blowup");
 	auto animate = Animate::create(animation);
 
 	auto removeEnemy2 = CallFunc::create(CC_CALLBACK_0(EnemyLayer::removeEnemy2, this, enemy2));
-	auto sequence = Sequence::create(animate, removeEnemy2, NULL);
+	auto sequence = Sequence::create(animate, removeEnemy2, nullptr);
 	enemy2->getSprite()->runAction(sequence);
 }
 
@@ -293,7 +293,7 @@ void EnemyLayer::addEnemy3(float dt)
 	int actualDuration = (rand()%rangeDuration)+minDuration;
 
 	auto actionMove = MoveTo::create(actualDuration, Point(actualX, 0-enemy3->getSprite()->getContentSize().height/2));
-	auto actionDone = CallFunc::create(CC_CALLBACK_0(EnemyLayer::enemy3MoveFinished, this, enemy3));
+	auto actionDone = CallFuncN::create(CC_CALLBACK_1(EnemyLayer::enemy3MoveFinished, this));
 
 	auto sequence = Sequence::create(actionMove, actionDone, nullptr);
 	enemy3->runAction(sequence);
@@ -315,7 +315,7 @@ void EnemyLayer::enemy3MoveFinished(Node* pSender)
 
 void EnemyLayer::enemy3Blowup(Enemy* enemy3)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/enemy3_down.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("enemy3_down.mp3");
     auto animation = AnimationCache::getInstance()->getAnimation("Enemy3Blowup");
 
 	auto animate = Animate::create(animation);
