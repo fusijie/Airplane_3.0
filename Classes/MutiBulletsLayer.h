@@ -45,5 +45,5 @@ public:
 
 	//CCSpriteFrame* mutiBulletsSpriteFrame;
 
-	SpriteBatchNode* mutiBullesBatchNode;
+//	SpriteBatchNode* mutiBullesBatchNode;
 };

@@ -4,7 +4,7 @@
 BulletLayer::BulletLayer(void)
 {
 	//bulletSpriteFrame=NULL;
-	bulletBatchNode = nullptr;
+//	bulletBatchNode = nullptr;
 
 	m_pAllBullet = __Array::create();
 	m_pAllBullet->retain();
@@ -25,9 +25,9 @@ bool BulletLayer::init()
 
 		//bulletSpriteFrame=CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("bullet1.png");
 
-		auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("shoot.png");
-		bulletBatchNode = SpriteBatchNode::createWithTexture(texture);
-		this->addChild(bulletBatchNode);
+//		auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("shoot.png");
+//		bulletBatchNode = SpriteBatchNode::createWithTexture(texture);
+//		this->addChild(bulletBatchNode);
 
 		bRet = true;
 	} while (0);
@@ -48,8 +48,8 @@ void BulletLayer::AddBullet(float dt)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("bullet.mp3");
 	auto bullet = Sprite::createWithSpriteFrameName("bullet1.png");
-	bulletBatchNode->addChild(bullet);
-	//this->addChild(bullet);
+//	bulletBatchNode->addChild(bullet);
+	this->addChild(bullet);
 	this->m_pAllBullet->addObject(bullet);
 
 	Point planePosition = PlaneLayer::sharedPlane->getChildByTag(AIRPLANE)->getPosition();
@@ -70,15 +70,17 @@ void BulletLayer::AddBullet(float dt)
 void BulletLayer::bulletMoveFinished(Node* pSender)
 {
 	auto bullet = (Sprite*)pSender;
-	this->bulletBatchNode->removeChild(bullet, true);
-	this->m_pAllBullet->removeObject(bullet);
+//	this->bulletBatchNode->removeChild(bullet, true);
+	this->removeChild(bullet, true);
+    this->m_pAllBullet->removeObject(bullet);
 }
 
 void BulletLayer::RemoveBullet(Sprite* bullet)
 {
 	if (bullet != nullptr)
 	{
-		this->bulletBatchNode->removeChild(bullet, true);
+//		this->bulletBatchNode->removeChild(bullet, true);
+        this->removeChild(bullet, true);
 		this->m_pAllBullet->removeObject(bullet);
 	}
 }

@@ -4,7 +4,7 @@
 MutiBulletsLayer::MutiBulletsLayer(void)
 {
 	//mutiBulletsSpriteFrame=NULL;
-	mutiBullesBatchNode = nullptr;
+	//mutiBullesBatchNode = nullptr;
 
 	m_pAllMutiBullets = __Array::create();
 	m_pAllMutiBullets->retain();
@@ -25,9 +25,9 @@ bool MutiBulletsLayer::init()
 
 		//mutiBulletsSpriteFrame=CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("bullet2.png");
 
-        auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("shoot.png");
-		mutiBullesBatchNode = SpriteBatchNode::createWithTexture(texture);
-		this->addChild(mutiBullesBatchNode);
+        //auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("shoot.png");
+		//mutiBullesBatchNode = SpriteBatchNode::createWithTexture(texture);
+		//this->addChild(mutiBullesBatchNode);
 
 		bRet = true;
 	} while (0);
@@ -50,9 +50,11 @@ void MutiBulletsLayer::AddMutiBullets(float dt)
 
 	auto bulletLeft = Sprite::createWithSpriteFrameName("bullet2.png");
 	auto bulletRight = Sprite::createWithSpriteFrameName("bullet2.png");
-	mutiBullesBatchNode->addChild(bulletLeft);
-	mutiBullesBatchNode->addChild(bulletRight);
-	this->m_pAllMutiBullets->addObject(bulletLeft);
+	//mutiBullesBatchNode->addChild(bulletLeft);
+	//mutiBullesBatchNode->addChild(bulletRight);
+	this->addChild(bulletLeft);
+    this->addChild(bulletRight);
+    this->m_pAllMutiBullets->addObject(bulletLeft);
 	this->m_pAllMutiBullets->addObject(bulletRight);
 
 	auto planePosition = PlaneLayer::sharedPlane->getChildByTag(AIRPLANE)->getPosition();
@@ -81,7 +83,8 @@ void MutiBulletsLayer::mutiBulletsMoveFinished(Node* pSender)
 {
 	auto mutiBullets = (Sprite*)pSender;
 	m_pAllMutiBullets->removeObject(mutiBullets);
-	this->mutiBullesBatchNode->removeChild(mutiBullets, true);
+	//this->mutiBullesBatchNode->removeChild(mutiBullets, true);
+    this->removeChild(mutiBullets, true);
 }
 
 void MutiBulletsLayer::RemoveMutiBullets(Sprite* mutiBullets)
@@ -89,6 +92,7 @@ void MutiBulletsLayer::RemoveMutiBullets(Sprite* mutiBullets)
 	if (mutiBullets != nullptr)
 	{
 		this->m_pAllMutiBullets->removeObject(mutiBullets);
-		this->mutiBullesBatchNode->removeChild(mutiBullets, true);
+        //this->mutiBullesBatchNode->removeChild(mutiBullets, true);
+        this->removeChild(mutiBullets, true);
 	}
 }

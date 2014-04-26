@@ -47,6 +47,6 @@ public:
 
 	//CCSpriteFrame* bulletSpriteFrame;
 
-	SpriteBatchNode* bulletBatchNode;
+//	SpriteBatchNode* bulletBatchNode;
 
 };
