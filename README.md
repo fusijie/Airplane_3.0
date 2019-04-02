@@ -15,7 +15,7 @@ QQ：754505629
 
 个人博客：[blog.csdn.net/jackystudio](http://blog.csdn.net/jackystudio) 
 
-个人网站：[www.fusijie.com](http://www.fusijie.com)
+个人网站：[http://fusijie.github.io](http://fusijie.github.io)
 
 ## 版本库地址
 
